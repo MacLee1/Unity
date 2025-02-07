@@ -1,0 +1,29 @@
+namespace ACHIEVEMENTMISSION;
+
+table AchievementMissionItem
+{
+	mission:uint (key,id: 0);
+	icon:ubyte (id: 1);
+	name:string (id: 2);
+	objective:uint (id: 3);
+	reward_type:uint (id: 4);
+	reward:uint (id: 5);
+	reward_amount:uint (id: 6);
+}
+
+table AchievementGroupItem
+{
+	group:uint (key,id: 0);
+	group_name:string (id: 1);
+	achievement:uint (id: 2);
+	list:[AchievementMissionItem] (id: 3);
+}
+
+table AchievementMissionList
+{
+	achievement_mission:[AchievementGroupItem] (id: 0);
+}
+
+root_type AchievementMissionList;
+file_identifier "ALFD";
+file_extension "bytes";
