@@ -1,0 +1,305 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+
+namespace USERDATA;
+
+table BiddingMsg
+{
+    id:ulong (id:0);
+    name:string(id:1);
+    emotion:ubyte(id:2);
+    gold:ulong(id:3);
+    token:uint(id:4);
+    emblem:[ubyte](id:5);
+}
+
+table ChatMsg
+{
+    id:ulong (id:0);
+    type:ubyte = 0 (id:1);
+    time:long (id: 2);
+    emblem:[ubyte](id:3);
+    name:string(id:4);
+    msg:string(id:5);
+    trophy:uint(id:6);
+    rank:ubyte(id:7);
+    tick:float(id:8);
+    index:int(id:9);
+}
+
+table PlayerAbility
+{
+    origin:ubyte(id:0);
+    changed:int(id:1);
+    current:int(id:2);
+}
+
+table Player
+{
+    id:ulong (id:0);
+    club:ulong (id:1);
+    status:ubyte(id:2);
+    forename:string(id:3);
+    surname:string(id:4);
+    nation:string(id:5);
+    price:ulong(id:6);
+    recmd_letter:uint(id:7);
+    age:ubyte(id:8);
+    height:ushort(id:9);
+    moral:ubyte(id:10);
+    hp:ubyte(id:11);
+    t_hp:long(id:12);
+    t_create:long(id:13);
+    create_season:uint(id:14);
+    position:ubyte(id:15);
+    position_familiars:[ubyte](id:16);
+    potential_tier:ubyte(id:17);
+    potential:uint(id:18);
+    ability_sum:uint(id:19);
+    ability_weight_sum:uint(id:20);
+    ability_tier:ubyte(id:21);
+    montage:[ushort](id:22);
+    ability:[PlayerAbility](id:23);
+}
+
+table ItemInfo
+{
+    no:uint (key,id:0);
+    amount:ulong (id:1);
+}
+
+table ClubLicenses
+{
+    parent:uint (key,id:0);
+    mission:uint (id:1);
+    amount:ulong (id:2);
+    level:uint (id:3);
+}
+
+table Quest
+{
+    parent:uint (key,id:0);
+    mission:uint (id:1);
+    amount:ulong (id:2);
+    level:uint (id:3);
+}
+
+table Achievement
+{
+    parent:uint (key,id:0);
+    level:uint (id:1);
+    amount:uint (id:2);
+}
+
+table TimeSale
+{
+    no:uint (id: 0);
+    t_expire_time:long (id:1);
+    t_expire:float (id:2);
+    status:ubyte (id:3);
+}
+
+table ProductFlatRate
+{
+    product:uint (key,id:0);
+    max:uint (id:1);
+    day:uint (id:2);
+    t_update:long (id:3);
+    t_refresh:long (id:4);
+}
+
+table ProductMileage
+{
+    no:uint (key,id:0);
+    level:uint (id:1);
+    amount:uint (id:2);
+}
+
+table Mileage
+{
+    no:uint (key,id:0);
+    level:uint (id:1);
+    amount:uint (id:2);
+}
+
+table Pass
+{
+    no:uint = 0 (key,id:0);
+    paid:bool = false (id:1);
+    amount:uint = 0(id:2);
+    level:uint = 0(id:3);
+    level2:uint = 0(id:4);
+    t_expire:long (id:5);
+}
+
+table MailInfo
+{
+    id:ulong (id:0);
+    type:ubyte (id:1); // 0: 일반, 10: 공지
+    status:ubyte (id:2); // 0: unread, 1. post, 5: read, 9: deleted  => icon화 해서 표시
+    
+    t_expire:long (id:3);
+    t_send:long (key,id:4);
+    title:string (id:5);
+    content:string (id:6);
+    data:string (id:7);
+    
+    rewards:[uint] (id:8);
+    amounts:[ulong] (id:9);
+}
+
+table MailBoxInfo
+{
+    mails:[MailInfo](id:0);
+}
+
+table RefreshADTime
+{
+    no:uint (id: 0);
+    t_ad_refresh_time:float (id:1);
+    t_ad_view_time:ulong (id:2);
+}
+
+table SettingInfo
+{
+    customer_no:ulong (id: 0);
+    mute_sfx:bool = 0(id:1);
+    review_count:ubyte = 0(id:2);
+    is_review:bool = 0(id:3);
+    ad_infos:[RefreshADTime] (id:4);
+    lang:ubyte = 1(id:5);
+    mute_bgm:bool = 0(id:6);
+    push:bool = 1(id:7);
+    night:bool = 1(id:8);
+    local_push:bool = 1(id:9);
+    match_view_mode:ubyte = 1(id:10);
+    match_view_speed:ubyte = 1(id:11);
+}
+
+table BusinessInfo
+{
+    no:uint(id:0);
+    level:uint(id:1);
+    redundancy:ulong(id:2);
+    remaining_time:float(id:3);
+    skip_update:bool(id:4);
+    building:ubyte(id:5);
+}
+
+table AttendInfo
+{
+    type:ubyte = 1 (id:0);
+    attend:uint = 0(id:1);
+    day:uint = 0(id:2);
+    rewarded:ubyte = 0(id:3);
+}
+
+table AuctionSellInfo
+{
+    auction_id:uint = 0(id:0);
+    status:ubyte = 0(id:1);
+    player:ulong = 0(id:2);
+    t_end:float (id:3);
+    t_expire:float (id:4);
+    t_extend:float (id:5);
+    reward:bool (id:6);
+    msg:string (id:7);
+    buyer:ulong = 0(id:8);
+    final_gold:ulong (id:9);
+    update:bool (id:10);
+    join:bool (id:11);
+    end:bool (id:12);
+}
+
+table AuctionBiddingInfo
+{
+    auction_id:uint = 0(id:0);
+    token:uint = 0(id:1);
+    gold: ulong = 0(id:2);
+    final_gold:ulong (id:3);
+    final_token:uint (id:4);
+    t_extend:float (id:5);
+    reward:bool (id:6);
+    update:bool (id:7);
+    msg:string(id:8);
+    player:Player(id:9);
+}
+
+table AuctionPlayerInfo
+{
+    auction_id :uint = 0(id:0);
+    initial_gold :ulong = 0(id:1);
+    player:Player(id:2);
+}
+
+table AuctionInfo
+{
+    round:uint = 0(id:0);
+    rank:ubyte = 0(id:1);
+    t_expire: long (id:2);
+    list:[AuctionPlayerInfo](id:3);
+}
+
+table GameInfo
+{
+    youth_slot_count:uint = 0(id:0);
+    youth_cooldown_time:uint = 0(id:1);
+    tutorial:ubyte = 0(id:2);
+    active_tactics:int = 0(id:3);
+    active_lineup:int = 0(id:4);
+    season_no:uint = 0(id:5);
+    unread_mail_count:uint (id: 6);
+    prev_season_standing:uint = 0(id:7);
+    prev_season_user_rank:ubyte = 0(id:8);
+    prev_season_trophy:uint = 0(id:9);
+    prev_season_no:uint = 0(id:10);
+    standing_reward:bool (id:11);
+    user_rank_reward:bool (id:12);
+    t_season_expire:long (id:13);
+    club_license:uint = 0(id:14);
+    quest_expire:float = 0(id:15);
+    t_challenge_ticket_charge:float = -1 (id:16);
+    // t_challenge_ticket_charge_time:float = -1 (id:17);
+    match_type:int = 1(id:17);
+    league_on:bool = 0(id:18);
+    league_today_count:int = 0(id:19);
+    league_today_max:int = 0(id:20);
+    players:[Player](id:21);
+    business_infos:[BusinessInfo](id:22);
+    training_infos:[BusinessInfo](id:23);
+}
+
+table ClubInfo
+{
+    id:ulong (id:0);
+    club_name:string (id:1);
+    age:ubyte(id:2);
+    nation:string(id:3);
+    gender:ubyte(id:4);
+    t_create:long (id: 5);
+    squad_capacity:uint (id:6);
+    emblem:[ubyte](id:7);
+}
+
+
+table TacticsInfo
+{
+    type:int(id: 0);
+    name:string (id: 1);
+}
+
+table UserData
+{
+    customer_no:ulong (id: 0);
+    setting_info:SettingInfo (id:1);
+    tactics_info:[TacticsInfo] (id:2);
+    // time_sale_info:[TimeSaleInfo] (id:3);
+    adjust_events:[string] (id:3);
+    
+}
+
+
+root_type UserData;
+
+file_identifier "ALFD";
+file_extension "bytes";

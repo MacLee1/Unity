@@ -1,0 +1,20 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+include "UserData.fbs";
+
+namespace USERDATA;
+
+table CachePlayerData
+{
+    t_recruit_expire:long = 0 (id:0);
+    t_youth_expire:long = 0 (id:1);
+    recruit_refresh_free:int = 0 (id:2);
+    youth_refresh_free:int = 0 (id:3);
+    recuiting:[USERDATA.Player] (id:4);
+    youth_promotion:[USERDATA.Player] (id:5);
+}
+
+root_type CachePlayerData;
+
+file_identifier "ALFD";
+file_extension "bytes";

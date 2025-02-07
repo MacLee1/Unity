@@ -1,0 +1,18 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+// include "StatisticsRecord.fbs";
+include "StatisticsPlayers.fbs";
+include "StatisticsTeam.fbs";
+
+namespace STATISTICSDATA;
+
+table MatchStatistics
+{
+	statistics_players:[STATISTICSDATA.StatisticsPlayers](id:0);
+	statistics_team:[STATISTICSDATA.TeamStatistics](id:1);
+}
+
+root_type MatchStatistics;
+
+file_identifier "ALFD";
+file_extension "bytes";

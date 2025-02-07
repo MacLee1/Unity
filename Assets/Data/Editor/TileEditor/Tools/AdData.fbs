@@ -1,0 +1,28 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+include "UserData.fbs";
+
+namespace USERDATA;
+
+table AdRewardData
+{
+    no:uint (id:0);
+    amount:uint (id:1);
+    basic_reward:ulong (id:2);
+    ad_reward:ulong (id:3);
+    t_activate: float =-1 (id: 4);
+    max_amount:uint (id:5);
+    activate: bool (id: 6);
+    item:uint (id:7);
+    t_start: long (id: 8);
+}
+
+table AdRewardInfo
+{
+    list:[AdRewardData] (id:0);
+}
+
+root_type AdRewardInfo;
+
+file_identifier "ALFD";
+file_extension "bytes";

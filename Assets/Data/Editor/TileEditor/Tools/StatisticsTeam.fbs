@@ -1,0 +1,45 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+// include "MazeMap.fbs";
+
+namespace STATISTICSDATA;
+
+table TeamStatistics
+{
+	possession_total:int(id:0);								// 총 점유율
+	possession_section:[int](id:1);	// 섹션별 점유율
+	total_shooting:int(id:2);
+	total_kick:int(id:3);
+	total_pass:int(id:4);
+	penalty_shoot_out:int(id:5);	// 승부차기 점수
+	total_offside:int(id:6);	// 오프사이드 발생 횟수
+	total_offside_trap:int(id:7);// 오프사이드 트랩 발생 횟수
+	common:[ushort](id:8);
+	team_rating:int = 0(id:9);
+}
+
+//   COMMON_STATISTICS_GOAL					// 득점
+// , COMMON_STATISTICS_ASSIST				// 도움
+// , COMMON_STATISTICS_SHOOT				// 슈팅
+// , COMMON_STATISTICS_SHOOT_ONTARGET		// 유효슈팅
+// , COMMON_STATISTICS_PASSTRY				// 패스시도
+// , COMMON_STATISTICS_PASSSUCCESS			// 패스성공
+// , COMMON_STATISTICS_INTERCEPT			// 인터셉트
+// , COMMON_STATISTICS_GK_GOOD_DEFENCE		// GK 선방
+// , COMMON_STATISTICS_HEADER				// 헤딩			?? 지금 안가고 있는듯?
+// , COMMON_STATISTICS_STEAL				// 스틸
+// , COMMON_STATISTICS_CORNERKICK			// 코너킥
+// , COMMON_STATISTICS_FREEKICK			// 프리킥
+// , COMMON_STATISTICS_PENALTYKICK			// 페널티킥
+// , COMMON_STATISTICS_PENALTYKICK_GOAL	// 페널티킥 성공(골)
+// , COMMON_STATISTICS_OWN_GOAL			// 자살골
+// , COMMON_STATISTICS_INJURY				// 부상
+// , COMMON_STATISTICS_FOUL				// 반칙
+// , COMMON_STATISTICS_YELLO_CARD			// 경고
+// , COMMON_STATISTICS_RED_CARD			// 퇴장
+// , COMMON_STATISTICS_END
+
+root_type TeamStatistics;
+
+file_identifier "ALFD";
+file_extension "bytes";

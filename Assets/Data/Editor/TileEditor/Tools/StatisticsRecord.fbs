@@ -1,0 +1,84 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+
+include "StatisticsData.fbs";
+
+namespace STATISTICSDATA;
+
+table CardRecord
+{
+    team_index:ubyte(id:0);
+    // player_id:ulong(id:1);
+    player_name:string(id:1);
+    yellow:ubyte(id:2);
+    red:ubyte(id:3);
+    minute:ushort(id:4);
+}
+
+table SubstitutionRecord
+{
+    team_index:ubyte(id:0);
+    // player_in_id:ulong(id:1);
+    player_in_name:string(id:1);
+    // player_out_id:ulong(id:2);
+    player_out_name:string(id:2);
+    minute:ushort(id:3);
+    second:ushort(id:4);
+}
+
+table GoalRecord
+{
+    team_index:ubyte(id:0);
+    // player_goal_id:ulong(id:1);
+    player_goal_name:string(id:1);
+    // player_assist_id:ulong(id:2);
+    player_assist_name:string(id:2);
+    minute:ushort(id:3);
+    second:ushort(id:4);
+    is_own_goal:bool(id:5);
+}
+
+table InjuryRecord
+{
+    team_index:ubyte(id:0);
+    player_name:string(id:1);
+
+    minute:ushort(id:2);
+}
+
+table TimeLine
+{
+    goal:GoalRecord(id:0);
+    substitution:SubstitutionRecord(id:1);
+    card:CardRecord(id:2);
+    injury:InjuryRecord(id:3);
+}
+
+table LineUp
+{
+    list:[int](id:0);
+    formation:[ubyte](id:1);
+}
+
+table Record
+{
+    id:ulong (key,id:0);
+    home_name:string (id:1);
+    away_name:string (id:2);
+    score:string (id:3);
+    time_record:[TimeLine](id:4);
+    statistics_record:STATISTICSDATA.MatchStatistics(id:5);
+    line_up_record:[LineUp](id:6);
+    home_id:ulong = 0 (id:7);
+    away_id:ulong = 0 (id:8);
+}
+
+table MatchLog
+{
+    list:[Record](id:0);
+}
+
+root_type MatchLog;
+
+file_identifier "ALFD";
+file_extension "bytes";

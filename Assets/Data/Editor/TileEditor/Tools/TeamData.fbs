@@ -1,0 +1,86 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+// include "MazeMap.fbs";
+
+namespace MATCHTEAMDATA;
+
+table SubstPair
+{
+	player_org_index:ubyte(id:0);
+    loc:ubyte(id:1);
+}
+
+table LineupPlayer
+{
+	type:ubyte(id:0);
+    data:[ulong](id:1);
+}
+
+table PlayerTactics
+{
+    tactics:[ubyte](id:0);
+}
+
+table Tactics
+{
+    formation:[ubyte](id:0);
+    team_tactics:[ubyte](id:1);
+    player_tactics:[PlayerTactics](id:2);
+}
+
+table InjuryResult
+{
+	index:short =-1 (id:0);
+	injury_day:short=0 (id:1);
+}
+    
+table PlayerSkill
+{
+	skill:ubyte =0 (id:0);		// 스킬 종류
+	skill_level:ubyte =0 (id:1);	// 스킬 레벨
+}
+
+table PlayerData
+{
+	ability:[ubyte](id:0);
+	pos_abil:[float](id:1);
+	talent:[ubyte](id:2);
+	player_name:string(id:3);
+	experience_level:ubyte(id:4);
+	experience_exp:int(id:5);
+	hp:ubyte(id:6);
+	age:ubyte(id:7);
+	player_id:ulong(id:8);
+	foot:ubyte = 3(id:9);
+	injury:InjuryResult(id:10);
+	is_valid_slot:bool=1(id:11);
+	team_work:byte=100(id:12);
+	satisfaction:byte=100(id:13);
+	player_skill:[PlayerSkill](id:14);
+	fans:int =0(id:15);
+	body_check_rate:float =1(id:16);
+	fans_came:int =0(id:17);
+	fan_buff_total:int =0(id:18);
+	license_i_d:int =0(id:19);				// 라이센스 id
+	back_num:ubyte =0(id:20);					// 등번호
+}
+
+table TeamData
+{
+	player_data:[PlayerData](id:0);
+    tactics:Tactics(id:1);
+    team_name:string(id:2);
+	team_id:ulong(id:3);
+	uniform_index:ushort(id:4);
+	team_work_total:float(id:5);
+	team_color:[ushort](id:6);
+	team_index:ushort(id:7);
+	line_up:[int](id:8);
+	subst:[int](id:9);
+	subst_pair:[SubstPair](id:10);
+}
+
+root_type TeamData;
+
+file_identifier "ALFD";
+file_extension "bytes";

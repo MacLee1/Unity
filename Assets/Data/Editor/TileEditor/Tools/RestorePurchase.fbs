@@ -1,0 +1,24 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+
+namespace USERDATA;
+
+table RestorePurchase
+{
+    customer_no:ulong (id: 0);
+    timeSale:uint (id: 1);
+    store:ubyte (id: 2);
+    sku:string(id: 3);
+    receipt:string (id: 4);
+    currency:string (id: 5);
+}
+
+table RestoreInfo
+{
+    list:[RestorePurchase]  (id: 0);
+}
+
+root_type RestoreInfo;
+
+file_identifier "ALFD";
+file_extension "bytes";

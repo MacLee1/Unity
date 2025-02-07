@@ -1,0 +1,39 @@
+// ./flatc --cpp --gen-object-api --binary ActorFileInfoMgr.fbs MonsterActorInfo.json
+// example IDL file
+// include "MazeMap.fbs";
+
+namespace STATISTICSDATA;
+
+// table PlayerSection
+// {
+// 	section:string(id:0);
+// }
+
+table PlayerStatistics
+{
+	player_id:ulong(id:0);
+	name:string(id:1);
+	rating:float(id:2);			// 평점
+	substitution_in_total_game_sec:int(id:3);	// 교체 in
+	substitution_out_total_game_sec:int(id:4);	// 교체 out
+	play_start_game_sec:int(id:5);
+	play_end_game_sec:int(id:6);
+	total_run_distance:float(id:7);	// 뛴 거리
+	common:[ushort](id:8);
+	ticks_in_position:[int](id:9);
+	g_k_conceeded:ushort(id:10);	// gk 실점
+	tackle_try:ushort(id:11);
+	hp:ubyte(id:12);
+
+	// playing_section:PlayerSection(id:10);
+}
+
+table StatisticsPlayers
+{
+	players:[PlayerStatistics](id:0);
+}
+
+root_type StatisticsPlayers;
+
+file_identifier "ALFD";
+file_extension "bytes";
